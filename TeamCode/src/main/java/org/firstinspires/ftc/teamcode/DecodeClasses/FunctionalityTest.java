@@ -10,9 +10,24 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 @TeleOp
 public final class FunctionalityTest extends LinearOpMode {
 
+    private Pose2d beginPose                = new Pose2d(0, 0, 0);
+    private MecanumDrive drive              = new MecanumDrive(hardwareMap, beginPose);
+    private CameraSystem camera             = new CameraSystem(hardwareMap);
+    private Firecracker rightFirecracker    =  new Firecracker(hardwareMap, "right_launcher");
+    private Firecracker leftFirecracker     =  new Firecracker(hardwareMap, "left_launcher");
+    private Inhaler inhaler                 = new Inhaler(hardwareMap, "intake");
+    private Feeder leftFeeder               = new Feeder(hardwareMap, "left_feeder");
+    private Feeder rightFeeder              = new Feeder(hardwareMap, "right_feeder");
+    private LED leftLight                   = new LED(hardwareMap, "left_light");
+    private LED middleLight                 = new LED(hardwareMap, "middle_light");
+    private LED rightLight                  = new LED(hardwareMap, "right_light");
+    private ColorSensorCode leftColor       = new ColorSensorCode(hardwareMap, "left_color_sensor");
+    private ColorSensorCode rightColor      = new ColorSensorCode(hardwareMap, "right_color_sensor");
+    private DriveMotorTest test1            = new DriveMotorTest(hardwareMap);
+
     @Override
     public void runOpMode() throws InterruptedException {
-
+        /*
         Pose2d beginPose                = new Pose2d(0, 0, 0);
         MecanumDrive drive              = new MecanumDrive(hardwareMap, beginPose);
         CameraSystem camera             = new CameraSystem(hardwareMap);
@@ -27,6 +42,8 @@ public final class FunctionalityTest extends LinearOpMode {
         ColorSensorCode leftColor       = new ColorSensorCode(hardwareMap, "left_color_sensor");
         ColorSensorCode rightColor      = new ColorSensorCode(hardwareMap, "right_color_sensor");
         DriveMotorTest test1            = new DriveMotorTest(hardwareMap);
+
+         */
         boolean reverse = true;
         boolean notReverse = false;
         int detectedID;
@@ -57,7 +74,7 @@ public final class FunctionalityTest extends LinearOpMode {
             if(gamepad1.x){
 
             }
-            //right bumper to start detectimg april tag
+            //right bumper to start detecting april tag
             while(gamepad1.right_trigger > 0){
                 detectedID = camera.getPattern();
                 telemetry.addData("aprilTag Id: ", detectedID);

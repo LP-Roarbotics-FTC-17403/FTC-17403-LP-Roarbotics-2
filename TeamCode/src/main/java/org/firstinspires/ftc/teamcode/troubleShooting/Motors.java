@@ -1,12 +1,14 @@
-package org.firstinspires.ftc.teamcode.DecodeClasses;
+package org.firstinspires.ftc.teamcode.troubleShooting;
+
 import static com.qualcomm.robotcore.hardware.DcMotor.ZeroPowerBehavior.BRAKE;
+
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 
-public class Firecracker {
+public class Motors {
     private DcMotorEx firecracker = null;
     double LAUNCHER_CLOSE_TARGET_VELOCITY = 1200; //in ticks/second for the close goal.
     final double LAUNCHER_CLOSE_MIN_VELOCITY = 1175; //minimum required to start a shot for close goal.
@@ -15,7 +17,7 @@ public class Firecracker {
     final double LAUNCHER_FAR_MIN_VELOCITY = 1325; //minimum required to start a shot for far goal.
 
 
-    public Firecracker(HardwareMap hardwareMap, String deviceName) {
+    public Motors(HardwareMap hardwareMap, String deviceName) {
         // Initialize arm motor
         firecracker = hardwareMap.get(DcMotorEx.class, deviceName);
 
