@@ -23,32 +23,31 @@ public class Inhaler {
         }
         inhale.setPower(INHALE_OFF);
     }
-    public class IntakeOn implements Action {
-        @Override
-        public boolean run(@NonNull TelemetryPacket packet){
-            inhale_on();
-            return true;
-        }
-    }
-    public Action intaking() {
-        return new IntakeOn();
-    }
 
-    public class IntakeOff implements Action {
-        @Override
-        public boolean run(@NonNull TelemetryPacket packet){
-            inhale_off();
-            return true;
-        }
-    }
-
-    public Action notIntaking(){
-        return new IntakeOff();
-    }
     public void inhale_on(){
         inhale.setPower(INHALE_ON);
     }
     public void inhale_off(){
         inhale.setPower(INHALE_OFF);
+    }
+
+    public Action intakeOn(){
+        return new Action() {
+            @Override
+            public boolean run(@NonNull TelemetryPacket telemetryPacket) {
+                inhale_on();
+                return false;
+            }
+        };
+    }
+
+    public Action rest(){
+        return new Action() {
+            @Override
+            public boolean run(@NonNull TelemetryPacket telemetryPacket) {
+                inhale_off();
+                return false;
+            }
+        };
     }
 }

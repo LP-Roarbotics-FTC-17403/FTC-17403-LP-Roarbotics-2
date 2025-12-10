@@ -8,8 +8,8 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class Hammer {
     private Servo hammer = null;
-    final double LEFT_POSITION = 0.2962; //the left and right position for the diverter servo
-    final double RIGHT_POSITION = 0;
+    final double LEFT_POSITION = 0.3162; //the left and right position for the diverter servo
+    final double RIGHT_POSITION = 0.035;
 
     public Hammer(HardwareMap hardwareMap, String deviceName){
         this.hammer = hardwareMap.get(Servo.class, deviceName);
@@ -19,28 +19,7 @@ public class Hammer {
         hammer.setPosition(LEFT_POSITION);
     }
 
-    public class Left implements Action {
-        @Override
-        public boolean run(@NonNull TelemetryPacket packet){
-            setLeft();
-            return true;
-        }
-    }
-    public Action moveLeft() {
-        return new Hammer.Left();
-    }
 
-    public class Right implements Action {
-        @Override
-        public boolean run(@NonNull TelemetryPacket packet){
-            setRight();
-            return true;
-        }
-    }
-
-    public Action moveRight(){
-        return new Hammer.Right();
-    }
     public void setRight(){
         hammer.setPosition(RIGHT_POSITION);
     }
@@ -49,4 +28,26 @@ public class Hammer {
         hammer.setPosition(LEFT_POSITION);
     }
 
+    public Action left(){
+        return new Action() {
+            @Override
+            public boolean run(@NonNull TelemetryPacket telemetryPacket) {
+
+                    hammer.setPosition(LEFT_POSITION);
+
+                return false;
+            }
+        };
+    }
+    public Action right(){
+        return new Action() {
+            @Override
+            public boolean run(@NonNull TelemetryPacket telemetryPacket) {
+
+                    hammer.setPosition(RIGHT_POSITION);
+
+                return false;
+            }
+        };
+    }
 }

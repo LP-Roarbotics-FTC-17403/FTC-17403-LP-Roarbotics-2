@@ -1,5 +1,10 @@
 package org.firstinspires.ftc.teamcode.SubSystems;
 import static com.qualcomm.robotcore.hardware.DcMotor.ZeroPowerBehavior.BRAKE;
+
+import androidx.annotation.NonNull;
+
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
+import com.acmerobotics.roadrunner.Action;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -8,7 +13,7 @@ import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 
 public class Firecracker {
     private DcMotorEx firecracker = null;
-    double LAUNCHER_CLOSE_TARGET_VELOCITY = 1200; //in ticks/second for the close goal.
+    double LAUNCHER_CLOSE_TARGET_VELOCITY = 1100; //in ticks/second for the close goal. //1200 original
     final double LAUNCHER_CLOSE_MIN_VELOCITY = 1175; //minimum required to start a shot for close goal.
 
     final double LAUNCHER_FAR_TARGET_VELOCITY = 1350; //Target velocity for far goal
@@ -49,6 +54,26 @@ public class Firecracker {
 
     public double getCurrentVelocity(){
         return firecracker.getVelocity();
+    }
+
+    public Action closeLaunch(){
+        return new Action() {
+            @Override
+            public boolean run(@NonNull TelemetryPacket telemetryPacket) {
+                crackDaFire();
+                return false;
+            }
+        };
+    }
+
+    public Action farLaunch(){
+        return new Action() {
+            @Override
+            public boolean run(@NonNull TelemetryPacket telemetryPacket) {
+                crackBigBoyFire();
+                return false;
+            }
+        };
     }
 
 
