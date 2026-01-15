@@ -121,7 +121,7 @@ public final class MSI_BlueSideGoalNoPattern extends LinearOpMode {
                         )
                 )
                 .splineToSplineHeading(new Pose2d(-6,-23, Math.toRadians(270)), Math.toRadians(270))
-                .afterDisp(6.3, ()->
+                .afterDisp(5.8, ()->
                         Actions.runBlocking(
                                 new ParallelAction(
                                         hammer.left()
@@ -135,8 +135,8 @@ public final class MSI_BlueSideGoalNoPattern extends LinearOpMode {
                                 hammer.right()
                         )
                 )
-                .splineToSplineHeading(new Pose2d(22,-19.5, Math.toRadians(270)), Math.toRadians(270))
-                .afterDisp(1.6, ()->
+                .splineToSplineHeading(new Pose2d(21,-19.5, Math.toRadians(270)), Math.toRadians(270))
+                .afterDisp(1.3, ()->
                         Actions.runBlocking(
                                 new ParallelAction(
                                         hammer.left()

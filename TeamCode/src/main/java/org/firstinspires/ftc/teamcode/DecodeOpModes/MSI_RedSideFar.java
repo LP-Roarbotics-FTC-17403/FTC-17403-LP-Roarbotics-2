@@ -26,7 +26,7 @@ import org.firstinspires.ftc.teamcode.SubSystems.LED;
 import org.firstinspires.ftc.teamcode.SubSystems.MotorClass;
 
 @Autonomous(group = "MSI")
-public final class MSI_RedSideGoalNoPattern extends LinearOpMode {
+public final class MSI_RedSideFar extends LinearOpMode {
 
     private Pose2d beginPose;
     private Pose2d launchPose;
@@ -70,7 +70,7 @@ public final class MSI_RedSideGoalNoPattern extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
 
-        beginPose                = new Pose2d(-56, 44, Math.toRadians(126.5));
+        beginPose                = new Pose2d(0, 0, Math.toRadians(165));
         launchPose              = new Pose2d(-16,15, Math.toRadians(134));
         drive              = new MecanumDrive(hardwareMap, beginPose);
         camera             = new CameraSystem(hardwareMap);
@@ -107,46 +107,20 @@ public final class MSI_RedSideGoalNoPattern extends LinearOpMode {
         Action fullCycleTest = drive.actionBuilder(beginPose)
                 .stopAndAdd(
                         new ParallelAction(
-                            leftFirecracker.closeLaunch(),
-                            rightFirecracker.closeLaunch(),
+                            leftFirecracker.farLaunch(),
+                            rightFirecracker.farLaunch(),
                             inhaler1.intakeOn(),
                             inhaler2.intakeOn()
                         )
                 )
-                .strafeToLinearHeading(new Vector2d(-16,15), Math.toRadians(134))
-                .stopAndAdd(
-                        new SequentialAction(
-                            leftLeftRight(),
-                            hammer.right()
-                        )
-                )
-                .splineToSplineHeading(new Pose2d(-8,22, Math.toRadians(90)), Math.toRadians(90))
-                .afterDisp(7, ()->
-                        Actions.runBlocking(
-                                new ParallelAction(
-                                        hammer.left()
-                                )
-                        ))
-                .lineToYLinearHeading(43, Math.toRadians(90), new TranslationalVelConstraint(10.0))
-                .splineToSplineHeading(launchPose, Math.toRadians(270))
+                .waitSeconds(2)
                 .stopAndAdd(
                         new SequentialAction(
                                 leftLeftRight(),
                                 hammer.right()
                         )
                 )
-                .splineToSplineHeading(new Pose2d(19,17.4, Math.toRadians(90)), Math.toRadians(90))
-                .afterDisp(4.5, ()->
-                        Actions.runBlocking(
-                                new ParallelAction(
-                                        hammer.left()
-                                )
-                        ))
-                .lineToYLinearHeading(43, Math.toRadians(90), new TranslationalVelConstraint(10.0))
-                .lineToYLinearHeading(30, Math.toRadians(90))
-                .splineToSplineHeading(launchPose, Math.toRadians(200))
-                .stopAndAdd(leftRightLeft())
-                .strafeToLinearHeading(new Vector2d(0,20), Math.toRadians(134))
+                .strafeToLinearHeading(new Vector2d(-2, 40), Math.toRadians(165))
                 .build();
 
 
